@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_flutter_test_pro/pages/home_page.dart';
 import 'package:my_flutter_test_pro/pages/login_page.dart';
+import 'package:my_flutter_test_pro/utils/routes.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -13,16 +14,16 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData(
         brightness: Brightness.dark
       ),
-      initialRoute: "/login",
+      initialRoute: "/",
       routes: {
-          "/":(context)=> LoginPage() ,
-        "/login":(context) => LoginPage(),
-        "/home":(context) => HomePage()
+          "/":(context)=> const LoginPage() ,
+        MyRoutes.loginRoutes :(context) => const LoginPage(),
+        MyRoutes.homeRoutes:(context) => const HomePage()
       },
     );
   }
 }
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
