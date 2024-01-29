@@ -10,6 +10,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   String name = "" ;
+  bool isClicked = false ;
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -64,14 +65,19 @@ class _LoginPageState extends State<LoginPage> {
               ),
 
               InkWell(
-                onTap:(){
+                onTap: () async {
+                  setState((){
+                    isClicked = true ;
+                  });
+                  await Future.delayed(Duration(seconds:  1)) ;
                   Navigator.pushNamed(context, MyRoutes.homeRoutes);
                 },
-                child: Container(
+                child: AnimatedContainer(
+                  duration: Duration(seconds: 1),
                   width: 120,
                   height: 40,
                   alignment: Alignment.center,
-                  child: Text("Login" ,
+                    child: isClicked ? Icon(Icons.done) : Text("Login" ,
                     style: TextStyle(
                     color: Colors.deepPurple ,
                       fontSize: 16 ,
@@ -79,11 +85,11 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.white ,
-                    borderRadius:  BorderRadius.circular(10)
+                    shape: isClicked ? BoxShape.circle : BoxShape.rectangle,
+                    color: isClicked ? Colors.green : Colors.white
                   )
+                )
                 ),
-              )
               /*ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(context, MyRoutes.homeRoutes);
